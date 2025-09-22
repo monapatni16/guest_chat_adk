@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "12bb82a8-5f58-4308-b6c0-c129e55e36eb",
+		"name": "Chat-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6111067"
+	},
+	"item": [
+		{
+			"name": "start session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();",
+							"pm.environment.set('session_id', response.session_id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"message\": \"Hello!\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/guest/start",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"guest",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"message\": \"What is software engineering\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8001/guest/{{session_id}}/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"guest",
+						"{{session_id}}",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "history",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"message\": \"Hello!\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/guest/{{session_id}}/history",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"guest",
+						"{{session_id}}",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear Chat history",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"message\": \"Hello!\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/guest/{{session_id}}/clear",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"guest",
+						"{{session_id}}",
+						"clear"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
